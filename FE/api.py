@@ -4,21 +4,43 @@
 import requests
 from FE.config import API_URL
 
+
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+import torch
+
+# Load model 1 lần duy nhất (bên ngoài hàm)
+model_path = r"C:\Workspace\ML\DA\checkpoint-3000\checkpoint-3000"
+tokenizer = AutoTokenizer.from_pretrained(model_path)
+model = AutoModelForSequenceClassification.from_pretrained(model_path)
+
+# Optional: định nghĩa nhãn nếu có
+LABELS = ["Dễ đọc", "Trung bình", "Khó đọc", "Rất khó đọc"]
+
+
 def analyze_text(text: str):
     """
-    Send a POST request to the backend API to analyze the given text.
+    Phân tích độ khó văn bản bằng mô hình đã fine-tuned.
 
     Args:
-        text (str): The Vietnamese text to analyze.
+        text (str): Văn bản tiếng Việt cần phân tích.
 
     Returns:
-        dict: The response from the backend, or an error message.
+        dict: Kết quả phân loại (lớp, nhãn, xác suất).
     """
     try:
-        response = requests.post(API_URL, json={"text": text})
-        if response.status_code == 200:
-            return response.json()
-        else:
-            return {"error": f"Lỗi: {response.status_code}"}
+        inputs = tokenizer(text, return_tensors="pt", truncation=True, padding=True)
+        with torch.no_grad():
+            outputs = model(**inputs)
+
+        logits = outputs.logits
+        predicted_class_id = torch.argmax(logits, dim=1).item()
+        confidence = torch.softmax(logits, dim=1)[0][predicted_class_id].item()
+
+        return {
+            "predicted_class": predicted_class_id,
+            "label": LABELS[predicted_class_id] if predicted_class_id < len(LABELS) else f"Lớp {predicted_class_id}",
+            "confidence": round(confidence, 4),
+            "difficulty": LABELS[predicted_class_id]  # Thêm dòng này để tương thích UI cũ
+        }
     except Exception as e:
         return {"error": str(e)}
