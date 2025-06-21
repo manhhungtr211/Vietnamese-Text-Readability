@@ -35,7 +35,7 @@ def handle_analyze(input_data: TextInput):
                     cursor.execute("""
                         INSERT INTO CONVERSATION (user_id, title)
                         VALUES (?, ?)
-                    """, (user["user_id"], "Cuộc trò chuyện mới"))
+                    """, (user["user_id"], input_data.text[:50])) # lấy 50 ký tự đầu tiên làm tiêu đề
                     conversation_id = cursor.lastrowid
 
                 # Ghi lịch sử

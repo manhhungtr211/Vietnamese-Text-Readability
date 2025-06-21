@@ -9,7 +9,6 @@ from config import API_URL
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 
-# Link model code cứng theo từng máy, TODO: cần thay đổi
 model_path = r"C:\Workspace\ML\DA\checkpoint-3000\checkpoint-3000"
 
 tokenizer = AutoTokenizer.from_pretrained(model_path)

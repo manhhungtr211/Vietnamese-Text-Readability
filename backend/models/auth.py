@@ -8,11 +8,5 @@ class RegisterInput(BaseModel):
     
 
 class LoginInput(BaseModel):
-    username: str
+    username: str # = Email
     password: str
-
-class TextInput(BaseModel):
-    text: str
-
-class HistoryInput(BaseModel):
-    username: str
