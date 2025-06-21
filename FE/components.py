@@ -42,3 +42,24 @@ def render_result(response):
     if "highlighted_text" in response:
         st.markdown("**🔍 Văn bản với từ khó được tô đậm:**")
         st.markdown(response["highlighted_text"], unsafe_allow_html=True)
+
+def render_login():
+    user = st.text_input("Tên đăng nhập")
+    pwd = st.text_input("Mật khẩu", type="password")
+    return user, pwd
+
+def render_register():
+    user = st.text_input("Tên đăng ký")
+    pwd = st.text_input("Mật khẩu đăng ký", type="password")
+    return user, pwd
+
+def render_logout():
+    st.sidebar.button("Đăng xuất")
+
+def render_history(history):
+    st.subheader("🕑 Lịch sử tra cứu")
+    if not history:
+        st.info("Chưa có lịch sử.")
+    else:
+        for i, item in enumerate(history[::-1]):
+            st.markdown(f"**{i+1}.** {item}")

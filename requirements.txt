@@ -1,3 +1,6 @@
-#For front end
 streamlit
 requests
+streamlit-authenticator
+bcrypt
+transformers
+torch
