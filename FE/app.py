@@ -5,8 +5,10 @@
 import streamlit as st
 import streamlit_authenticator as stauth
 import bcrypt
-from FE.components import render_title, render_input_area, render_submit_button, render_result, render_login, render_register, render_logout, render_history
-from FE.api import analyze_text, login_user, register_user, get_history
+#from FE.
+from components import render_title, render_input_area, render_submit_button, render_result, render_login, render_register, render_logout, render_history
+#from FE.
+from api import analyze_text, login_user, register_user, get_history
 
 def main():
     """

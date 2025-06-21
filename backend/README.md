@@ -1,0 +1,1 @@
+Chạy lệnh sau tại thư mục gốc: python -m uvicorn backend.main:app --reload

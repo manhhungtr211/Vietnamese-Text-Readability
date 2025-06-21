@@ -1,0 +1,7 @@
+### Gọi api đăng ký user mới
+response = requests.post("http://127.0.0.1:8000/register", json={
+    "username": "ddddd@gmail.com",
+    "full_name": "Nguyễn Văn A",
+    "password": "123456"
+})
+print(response.json())

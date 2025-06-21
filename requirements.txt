@@ -4,3 +4,5 @@ streamlit-authenticator
 bcrypt
 transformers
 torch
+fastapi[all]
+uvicorn[standard]
