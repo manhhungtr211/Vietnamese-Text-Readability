@@ -15,11 +15,11 @@ def analyze_text(text: str):
         dict: The response from the backend, or an error message.
     """
     try:
-        response = requests.post(API_URL, json={"text": text})
-        if response.status_code == 200:
-            return response.json()
+        resp = requests.post(f"{API_URL}/analyze", json={"text": text})
+        if resp.status_code == 200:
+            return resp.json()
         else:
-            return {"error": f"Lỗi: {response.status_code}"}
+            return {"error": f"Lỗi: {resp.status_code}"}
     except Exception as e:
         return {"error": str(e)}
 
@@ -40,7 +40,7 @@ def register_user(username, password):
 
 def get_history(username):
     try:
-        resp = requests.get(f"{API_URL}/history", params={"username": username})
+        resp = requests.get(f"{API_URL}/analyze/history", params={"username": username})
         if resp.status_code == 200:
             return resp.json().get("history", [])
         return []
