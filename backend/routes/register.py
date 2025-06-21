@@ -13,7 +13,7 @@ def hash_password(password: str) -> str:
     return sha256(password.encode()).hexdigest()
 
 @router.post("/register")
-def register(data: RegisterInput):
+def handle_register(data: RegisterInput):
     try:
         conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
