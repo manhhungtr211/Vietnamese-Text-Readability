@@ -1,7 +1,7 @@
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 
-model_path = r"C:\Workspace\ML\DA\checkpoint-3000\checkpoint-3000"
+model_path = r"D:\HuyMai\Y3-HK2\IntroToMachineLearning\Project\checkpoint-3000"
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 model = AutoModelForSequenceClassification.from_pretrained(model_path)
 

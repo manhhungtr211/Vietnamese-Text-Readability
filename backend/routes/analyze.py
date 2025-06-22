@@ -54,3 +54,31 @@ def handle_analyze(input_data: TextInput):
                 print(f"Lỗi khi lưu lịch sử: {e}")
 
     return result
+
+@router.get("/analyze/history")
+def get_history(session_id: str):
+    """
+    Lấy lịch sử các câu đã tra cứu của user theo session_id.
+    """
+    user = get_user_by_session(session_id)
+    if not user:
+        raise HTTPException(status_code=401, detail="Session không hợp lệ hoặc đã hết hạn.")
+
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        # Lấy tất cả conversation_id của user
+        cursor.execute("SELECT conversation_id FROM CONVERSATION WHERE user_id = ?", (user["user_id"],))
+        conv_ids = [row[0] for row in cursor.fetchall()]
+        history = []
+        for conv_id in conv_ids:
+            cursor.execute(
+                "SELECT message, reply FROM CHAT_HISTORY WHERE conversation_id = ? ORDER BY created_at ASC",
+                (conv_id,)
+            )
+            for msg, reply in cursor.fetchall():
+                history.append({"message": msg, "reply": reply})
+        conn.close()
+        return {"history": history}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
