@@ -10,3 +10,6 @@ class RegisterInput(BaseModel):
 class LoginInput(BaseModel):
     username: str # = Email
     password: str
+    
+class LogoutInput(BaseModel):
+    session_id: str

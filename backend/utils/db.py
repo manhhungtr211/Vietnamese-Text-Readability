@@ -47,3 +47,12 @@ def init_db():
     conn.commit()
     conn.close()
     print(f"connected to database successfully")
+
+def execute_query(query, params=()):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute(query, params)
+    result = cursor.fetchall()
+    conn.commit()
+    conn.close()
+    return result

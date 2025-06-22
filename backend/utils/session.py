@@ -12,3 +12,9 @@ def get_user_by_session(session_id: str):
 
 def delete_session(session_id: str):
     session_store.pop(session_id, None)
+
+def get_user_id_by_session(session_id: str) -> int:
+    user_info = get_user_by_session(session_id)
+    if user_info:
+        return user_info.get("user_id")
+    return None
