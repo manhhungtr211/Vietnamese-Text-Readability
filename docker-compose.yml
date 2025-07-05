@@ -7,7 +7,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./readibility_model.pt:/app/readibility_model.pt:ro
+      - ./backend/database/chat_history.db:/app/backend/database/chat_history.db
 
   frontend:
     build:
@@ -17,3 +17,5 @@ services:
       - "8501:8501"
     depends_on:
       - backend
+    environment:
+      - API_BASE_URL=http://backend:8000

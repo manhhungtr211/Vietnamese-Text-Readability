@@ -4,5 +4,6 @@ streamlit-authenticator
 bcrypt
 transformers
 torch
+gdown
 fastapi[all]
 uvicorn[standard]
