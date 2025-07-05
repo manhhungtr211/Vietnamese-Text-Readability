@@ -101,9 +101,9 @@ Bạn có thể thử API tại: `http://localhost:8000/docs`
 
 ## 👥 Thành viên nhóm
 
-* 💻 \[Họ tên 1] – BE, ML
-* 🎨 \[Họ tên 2] – FE, UI
-* 📊 \[Họ tên 3] – Dataset, Training
+* 💻 \[Võ Nguyễn Song Huy, Nguyễn Hùng Việt] – BE, ML
+* 🎨 \[Mai Nhựt Huy, Vy Quốc Huy] – FE, UI
+* 📊 \[Trần Mạnh Hùng] – Dataset, Training
 
 ---
 
