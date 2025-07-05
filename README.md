@@ -5,7 +5,7 @@ Một ứng dụng Machine Learning dùng mô hình BERT (PhoBERT) để phân l
 Giao diện frontend được xây dựng bằng **Streamlit**, backend API sử dụng **FastAPI**.
 
 ---
-
+```
 ## 📁 Cấu trúc thư mục
 
 ```
