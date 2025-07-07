@@ -7,6 +7,15 @@ from backend.routes import login, register, analyze
 init_db()
 
 app = FastAPI(title="Vietnamese Readability API")
+
+@app.get("/health")
+def health_check():
+    return {"status": "healthy"}
+
+@app.get("/")
+def root():
+    return {"message": "Vietnamese Readability API is running"}
+
 app.include_router(register.router)
 app.include_router(login.router)
 app.include_router(analyze.router)
