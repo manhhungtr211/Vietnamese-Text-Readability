@@ -7,5 +7,5 @@ __pycache__/
 .env
 node_modules/
 *.pt
-chat_history.db
+#chat_history.db
 ```
