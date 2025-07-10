@@ -17,7 +17,30 @@ def render_result(response):
         return
 
     st.subheader("📊 Kết quả phân tích")
-    st.markdown(f"**Mức độ khó:** `{response['difficulty']}`")
+
+    difficulty_mapping = {
+        "dễ đọc": {"text": "Dễ đọc", "color": "#28a745"},       # xanh lá
+        "trung bình": {"text": "Trung bình", "color": "#eaff00"}, # vàng
+        "khó đọc": {"text": "Khó đọc", "color": "#fc9b00"},      # cam
+        "rất khó đọc": {"text": "Rất khó đọc", "color": "#dc3545"}  # đỏ
+    }
+
+    difficulty = response.get('difficulty', '').lower()
+    if difficulty in difficulty_mapping:
+        display_text = difficulty_mapping[difficulty]["text"]
+        color = difficulty_mapping[difficulty]["color"]
+        
+        st.markdown(
+            f"""
+            <div style="font-size: 20px; font-weight: bold;">
+                Mức độ khó: <span style="color: {color};">{display_text}</span>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+    else:
+        st.markdown(f"**Mức độ khó:** `{response['difficulty']}`")
+
 
 def render_login():
     user = st.text_input("Tên đăng nhập")
